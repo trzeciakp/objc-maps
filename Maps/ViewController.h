@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startTrackingButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopTrackingButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLGeocoder *geocoder;
 @property (strong, nonatomic) CLLocation *startLocation;
 @property (strong, nonatomic) CLLocation *lastLocation;
 

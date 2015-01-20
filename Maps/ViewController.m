@@ -20,11 +20,13 @@
     if ([CLLocationManager locationServicesEnabled])
     {
         _locationManager = [[CLLocationManager alloc] init];
+        _geocoder = [[CLGeocoder alloc] init];
         [_locationManager requestWhenInUseAuthorization];
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.delegate = self;
     [_locationManager startUpdatingLocation];
     }
+    _mapView.showsUserLocation = YES;
     _startLocation = nil;
 }
 
@@ -53,6 +55,52 @@
                                  newLocation.altitude];
     
     _altText.text = currentAltitude;
+    
+    
+    NSString *currentSpeed = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 newLocation.speed];
+    
+    _speedText.text = currentSpeed;
+    
+    [self.geocoder reverseGeocodeLocation: newLocation
+                       completionHandler:^(NSArray *placemarks, NSError *error) {
+                           
+        NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
+        if (error){
+            _addrText.text = @"not found";
+        }
+        
+                           
+                           if(placemarks && placemarks.count > 0)
+                               
+                           {
+                               //do something
+                               CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                               NSString *addressTxt = [NSString stringWithFormat:@"%@ %@,%@ %@",
+                                                       [topResult subThoroughfare],[topResult thoroughfare],
+                                                       [topResult locality], [topResult administrativeArea]];
+                               NSLog(@"%@",addressTxt);
+                               
+                               _addrText.text = addressTxt;
+                           } else {
+                               
+                               _addrText.text = @"not found";
+                           }
+    }];
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.010;
+    span.longitudeDelta = 0.010;
+    CLLocationCoordinate2D location;
+    location.latitude = newLocation.coordinate.latitude;
+    location.longitude = newLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [_mapView setRegion:region animated:YES];
+
+    
     
     
 }
