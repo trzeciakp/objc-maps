@@ -14,6 +14,7 @@
 		AC94D2E51A6E3A5800B83BD5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC94D2E41A6E3A5800B83BD5 /* Images.xcassets */; };
 		AC94D2E81A6E3A5800B83BD5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC94D2E61A6E3A5800B83BD5 /* LaunchScreen.xib */; };
 		AC94D2F41A6E3A5800B83BD5 /* MapsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94D2F31A6E3A5800B83BD5 /* MapsTests.m */; };
+		AC94D3001A6E3DEF00B83BD5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC94D2FF1A6E3DEF00B83BD5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		AC94D2ED1A6E3A5800B83BD5 /* MapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC94D2F21A6E3A5800B83BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC94D2F31A6E3A5800B83BD5 /* MapsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapsTests.m; sourceTree = "<group>"; };
+		AC94D2FF1A6E3DEF00B83BD5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC94D3001A6E3DEF00B83BD5 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		AC94D2CB1A6E3A5700B83BD5 = {
 			isa = PBXGroup;
 			children = (
+				AC94D2FF1A6E3DEF00B83BD5 /* MapKit.framework */,
 				AC94D2D61A6E3A5800B83BD5 /* Maps */,
 				AC94D2F01A6E3A5800B83BD5 /* MapsTests */,
 				AC94D2D51A6E3A5800B83BD5 /* Products */,
@@ -168,6 +172,11 @@
 				TargetAttributes = {
 					AC94D2D31A6E3A5800B83BD5 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					AC94D2EC1A6E3A5800B83BD5 = {
 						CreatedOnToolsVersion = 6.1.1;

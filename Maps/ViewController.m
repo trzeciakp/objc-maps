@@ -14,14 +14,47 @@
 
 @implementation ViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    if ([CLLocationManager locationServicesEnabled])
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        [_locationManager requestWhenInUseAuthorization];
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.delegate = self;
+    [_locationManager startUpdatingLocation];
+    }
+    _startLocation = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+                            
+-(void)locationManager:(CLLocationManager *)manager
+   didUpdateToLocation:(CLLocation *)newLocation
+          fromLocation:(CLLocation *)oldLocation
+{
+    NSString *currentLatitude = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 newLocation.coordinate.latitude];
+    _latText.text = currentLatitude;
+    
+    NSString *currentLongitude = [[NSString alloc]
+                                  initWithFormat:@"%+.6f",
+                                  newLocation.coordinate.longitude];
+    _lonText.text = currentLongitude;
+    
+    NSString *currentAltitude = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 newLocation.altitude];
+    
+    _altText.text = currentAltitude;
+    
+    
 }
 
 @end
