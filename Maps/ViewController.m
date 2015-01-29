@@ -24,8 +24,9 @@
         [_locationManager requestWhenInUseAuthorization];
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.delegate = self;
-    [_locationManager startUpdatingLocation];
     }
+    _annotation = [[MKPointAnnotation alloc] init];
+    [_mapView addAnnotation:_annotation];
     _mapView.showsUserLocation = YES;
     _startLocation = nil;
 }
@@ -35,11 +36,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-                            
 -(void)locationManager:(CLLocationManager *)manager
    didUpdateToLocation:(CLLocation *)newLocation
           fromLocation:(CLLocation *)oldLocation
 {
+    NSLog(@"location update");
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%+.6f",
                                  newLocation.coordinate.latitude];
@@ -99,10 +100,20 @@
     region.span = span;
     region.center = location;
     [_mapView setRegion:region animated:YES];
+    
+    [_annotation setCoordinate:newLocation.coordinate];
+    [_annotation setTitle:@"Annotation"];
 
     
     
     
+}
+
+- (IBAction)startClicked:(id)sender {
+    [_locationManager startUpdatingLocation];
+}
+- (IBAction)stopClicked:(id)sender {
+    [_locationManager stopUpdatingLocation];
 }
 
 @end

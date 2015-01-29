@@ -26,6 +26,11 @@
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (strong, nonatomic) CLLocation *startLocation;
 @property (strong, nonatomic) CLLocation *lastLocation;
+@property (strong, nonatomic) MKPointAnnotation *annotation;
+
+
+- (IBAction)startClicked:(id)sender;
+- (IBAction)stopClicked:(id)sender;
 
 @end
 
